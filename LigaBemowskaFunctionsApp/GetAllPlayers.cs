@@ -17,7 +17,7 @@ namespace LigaBemowskaFunctionsApp
     {
         [FunctionName("GetAllPlayers")]
         public static string Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
