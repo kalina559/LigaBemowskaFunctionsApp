@@ -13,7 +13,7 @@ namespace LigaBemowskaFunctionsApp
     public class UpdatePlayerData
     {
         [FunctionName("UpdatePlayerData")]
-        public async Task RunAsync([TimerTrigger("*/5 * * * * *")] TimerInfo myTimer, ILogger log)
+        public async Task RunAsync([TimerTrigger("0 0 * * * *")] TimerInfo myTimer, ILogger log)
         {
             log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
 

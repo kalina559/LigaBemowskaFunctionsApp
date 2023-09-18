@@ -18,12 +18,19 @@ namespace LigaBemowskaFunctionsApp
         [FunctionName("GetAllPlayers")]
         public static string Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            [Table("Players")] IQueryable<Players> players,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            var json = JsonConvert.SerializeObject(players.ToArray());
+            string connectionString = "DefaultEndpointsProtocol=https;AccountName=ligabemowskastats;AccountKey=8TMzEAfg6lzzV/VfBqZhCmzZMUwDcdYh81Laal2vqOrS7/q77gTlyccgxJcCCrFVQcAVxgEn214d+ASt+OZxkw==;EndpointSuffix=core.windows.net";
+            string tableName = "Players";
+
+            var serviceClient = new TableServiceClient(connectionString);
+            var tableClient = serviceClient.GetTableClient(tableName);
+            var query = TableClient.CreateQueryFilter($"");
+            var queryResults = tableClient.Query<Players>(query);
+
+            var json = JsonConvert.SerializeObject(queryResults.ToArray());
 
             return json;
         }
