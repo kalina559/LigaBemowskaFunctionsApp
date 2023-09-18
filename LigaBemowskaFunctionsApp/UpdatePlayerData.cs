@@ -1,16 +1,14 @@
 using System;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
 using System.Linq;
-using System.Net;
 using HtmlAgilityPack;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace LigaBemowskaFunctionsApp
 {
-    public class Function1
+    public class UpdatePlayerData
     {
         [FunctionName("UpdatePlayerData")]
         public async Task RunAsync([TimerTrigger("*/5 * * * * *")]TimerInfo myTimer, ILogger log)
