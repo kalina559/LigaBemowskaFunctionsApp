@@ -7,29 +7,39 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Azure;
+using Azure.Data.Tables;
+using System.Linq;
 
 namespace LigaBemowskaFunctionsApp
 {
     public static class GetAllPlayers
     {
         [FunctionName("GetAllPlayers")]
-        public static async Task<IActionResult> Run(
+        public static string Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+            [Table("Players")] IQueryable<Players> players,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            string name = req.Query["name"];
+            var json = JsonConvert.SerializeObject(players.ToArray());
 
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            name = name ?? data?.name;
+            return json;
+        }
 
-            string responseMessage = string.IsNullOrEmpty(name)
-                ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-                : $"Hello, {name}. This HTTP triggered function executed successfully.";
-
-            return new OkObjectResult(responseMessage);
+        public class Players : ITableEntity
+        {
+            public string RowKey { get; set; }
+            public string Name { get; set; }
+            public string Goals { get; set; }
+            public string Assists { get; set; }
+            public string YellowCards { get; set; }
+            public string RedCards { get; set; }
+            public string MOTMS { get; set; }
+            public string PartitionKey { get; set; }
+            public DateTimeOffset? Timestamp { get; set; }
+            public ETag ETag { get; set; }
         }
     }
 }
