@@ -8,12 +8,12 @@ namespace LigaBemowskaFunctionsApp.Models
     public class Player : ITableEntity
     {
         public string Name { get; set; }
-        public string Appearances { get; set; }
-        public string Goals { get; set; }
-        public string Assists { get; set; }
-        public string YellowCards { get; set; }
-        public string RedCards { get; set; }
-        public string MOTMS { get; set; }        
+        public int Appearances { get; set; }
+        public int Goals { get; set; }
+        public int Assists { get; set; }
+        public int YellowCards { get; set; }
+        public int RedCards { get; set; }
+        public int MOTMS { get; set; }        
         public DateTimeOffset? Timestamp { get; set; }
 
         [JsonIgnore]
@@ -32,23 +32,23 @@ namespace LigaBemowskaFunctionsApp.Models
             PartitionKey = "1";   // always 1
             RowKey = data.Id.ToString();
             Name = data.Name;
-            Appearances = data.Appearances;
-            Goals = data.Goals;
-            Assists = data.Assists;
-            YellowCards = data.YellowCards;
-            RedCards = data.RedCards;
-            MOTMS = data.MOTMS;
+            Appearances = int.Parse(data.Appearances);
+            Goals = int.Parse(data.Goals);
+            Assists = int.Parse(data.Assists);
+            YellowCards = int.Parse(data.YellowCards);
+            RedCards = int.Parse(data.RedCards);
+            MOTMS = int.Parse(data.MOTMS);
         }
 
         public void UpdatePlayer(PlayerData data)
         {
             Name = data.Name;
-            Appearances = data.Appearances;
-            Goals = data.Goals;
-            Assists = data.Assists;
-            YellowCards = data.YellowCards;
-            RedCards = data.RedCards;
-            MOTMS = data.MOTMS;
+            Appearances = int.Parse(data.Appearances);
+            Goals = int.Parse(data.Goals);
+            Assists = int.Parse(data.Assists);
+            YellowCards = int.Parse(data.YellowCards);
+            RedCards = int.Parse(data.RedCards);
+            MOTMS = int.Parse(data.MOTMS);
         }
     }
 }

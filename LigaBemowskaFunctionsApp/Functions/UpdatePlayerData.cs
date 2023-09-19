@@ -9,7 +9,7 @@ namespace LigaBemowskaFunctionsApp.Functions
     public class UpdatePlayerData
     {
         [FunctionName("UpdatePlayerData")]
-        public async Task RunAsync([TimerTrigger("30 17 * * TUE")] TimerInfo myTimer, ILogger log)
+        public async Task RunAsync([TimerTrigger("0 45 17 * * Tue")] TimerInfo myTimer, ILogger log)
         {
             log.LogInformation($"Started UpdatePlayerData function executed at: {DateTime.Now}");
 
@@ -34,7 +34,7 @@ namespace LigaBemowskaFunctionsApp.Functions
             //    id++;
             //}
 
-            for (int i = 100; i < 600; i++)
+            for (int i = 0; i < 500; i++)
             {
                 try
                 {
@@ -47,7 +47,6 @@ namespace LigaBemowskaFunctionsApp.Functions
             }
 
             log.LogInformation($"Finished UpdatePlayerData function executed at: {DateTime.Now}");
-
         }
     }
 }
