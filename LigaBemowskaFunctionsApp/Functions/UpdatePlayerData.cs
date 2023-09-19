@@ -17,7 +17,7 @@ namespace LigaBemowskaFunctionsApp.Functions
         const string BLOB_NAME = "iterator.txt";
 
         [FunctionName("UpdatePlayerData")]
-        public async Task RunAsync([TimerTrigger("0 */5 * * * Tue")] TimerInfo myTimer, ILogger log)
+        public async Task RunAsync([TimerTrigger("0 */5 20-23 * * *")] TimerInfo myTimer, ILogger log)
         {
             log.LogInformation($"Started UpdatePlayerData function executed at: {DateTime.Now}");
 

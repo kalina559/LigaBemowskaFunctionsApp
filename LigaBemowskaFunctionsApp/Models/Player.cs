@@ -43,6 +43,7 @@ namespace LigaBemowskaFunctionsApp.Models
 
         public void UpdatePlayer(PlayerData data)
         {
+            Id = data.Id;
             Name = data.Name;
             Appearances = int.Parse(data.Appearances);
             Goals = int.Parse(data.Goals);
