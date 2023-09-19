@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using LigaBemowskaFunctionsApp.Helpers;
+using Microsoft.Extensions.Logging;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -11,10 +12,10 @@ namespace LigaBemowskaFunctionsApp.Services
         private readonly HttpClient httpClient;
         private readonly TableService tableService;
 
-        public PlayerService()
+        public PlayerService(ILogger log)
         {
             httpClient = new HttpClient();
-            tableService = new TableService();
+            tableService = new TableService(log);
         }
 
         public async Task AddOrUpdatePlayer(int id)
