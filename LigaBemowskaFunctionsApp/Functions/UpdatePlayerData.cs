@@ -1,14 +1,7 @@
 using System;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
-using System.Linq;
-using HtmlAgilityPack;
-using System.Net.Http;
 using System.Threading.Tasks;
-using Azure.Data.Tables;
-using Azure;
-using LigaBemowskaFunctionsApp.Models;
-using LigaBemowskaFunctionsApp.Helpers;
 using LigaBemowskaFunctionsApp.Services;
 
 namespace LigaBemowskaFunctionsApp.Functions
@@ -22,17 +15,24 @@ namespace LigaBemowskaFunctionsApp.Functions
 
             var playerService = new PlayerService();
 
-            for(int i = 100; i < 105; i++)
+            var counter = 0;
+            var id = 0;
+
+            while (counter < 20)
             {
                 try
                 {
-                    await playerService.AddOrUpdatePlayer(i);
+                    counter--;
+                    await playerService.AddOrUpdatePlayer(id);
                 }
                 catch (Exception ex)
                 {
+                    counter++;
                     log.LogError($"Failed to upload Player %{i} because of {ex.Message}");
                 }
-            }           
+
+                id++;
+            }
 
             log.LogInformation($"Finished UpdatePlayerData function executed at: {DateTime.Now}");
 
