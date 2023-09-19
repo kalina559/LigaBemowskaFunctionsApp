@@ -7,6 +7,11 @@ namespace LigaBemowskaFunctionsApp.Models
 {
     public class Player : ITableEntity
     {
+        public string RowKey { get; set; }
+        [JsonIgnore]
+        public string PartitionKey { get; set; }
+        [JsonIgnore]
+        ETag ITableEntity.ETag { get; set; }
         public string Name { get; set; }
         public int Appearances { get; set; }
         public int Goals { get; set; }
@@ -15,13 +20,6 @@ namespace LigaBemowskaFunctionsApp.Models
         public int RedCards { get; set; }
         public int MOTMS { get; set; }        
         public DateTimeOffset? Timestamp { get; set; }
-
-        [JsonIgnore]
-        public string RowKey { get; set; }
-        [JsonIgnore]
-        public string PartitionKey { get; set; }
-        [JsonIgnore]
-        ETag ITableEntity.ETag { get; set; }
 
         public Player()
         {
