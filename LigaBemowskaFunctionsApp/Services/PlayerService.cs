@@ -30,7 +30,8 @@ namespace LigaBemowskaFunctionsApp.Services
 
             if (player != null)
             {
-                player.UpdatePlayer(playerHtmlData);            
+                player.UpdatePlayer(playerHtmlData);
+                tableService.UpdatePlayer(player);
             }
             else
             {
