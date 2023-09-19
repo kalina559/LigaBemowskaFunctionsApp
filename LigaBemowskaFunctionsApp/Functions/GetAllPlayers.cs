@@ -10,8 +10,9 @@ using Newtonsoft.Json;
 using Azure;
 using Azure.Data.Tables;
 using System.Linq;
+using LigaBemowskaFunctionsApp.Models;
 
-namespace LigaBemowskaFunctionsApp
+namespace LigaBemowskaFunctionsApp.Functions
 {
     public static class GetAllPlayers
     {
@@ -28,25 +29,13 @@ namespace LigaBemowskaFunctionsApp
             var serviceClient = new TableServiceClient(connectionString);
             var tableClient = serviceClient.GetTableClient(tableName);
             var query = TableClient.CreateQueryFilter($"");
-            var queryResults = tableClient.Query<Players>(query);
+            var queryResults = tableClient.Query<Player>(query);
 
             var json = JsonConvert.SerializeObject(queryResults.ToArray());
 
             return json;
         }
 
-        public class Players : ITableEntity
-        {
-            public string RowKey { get; set; }
-            public string Name { get; set; }
-            public string Goals { get; set; }
-            public string Assists { get; set; }
-            public string YellowCards { get; set; }
-            public string RedCards { get; set; }
-            public string MOTMS { get; set; }
-            public string PartitionKey { get; set; }
-            public DateTimeOffset? Timestamp { get; set; }
-            public ETag ETag { get; set; }
-        }
+        
     }
 }
