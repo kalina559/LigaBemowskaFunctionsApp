@@ -7,11 +7,13 @@ namespace LigaBemowskaFunctionsApp.Models
 {
     public class Player : ITableEntity
     {
+        [JsonIgnore]
         public string RowKey { get; set; }
         [JsonIgnore]
         public string PartitionKey { get; set; }
         [JsonIgnore]
         ETag ITableEntity.ETag { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public int Appearances { get; set; }
         public int Goals { get; set; }
@@ -29,6 +31,7 @@ namespace LigaBemowskaFunctionsApp.Models
         {
             PartitionKey = "1";   // always 1
             RowKey = data.Id.ToString();
+            Id = data.Id;
             Name = data.Name;
             Appearances = int.Parse(data.Appearances);
             Goals = int.Parse(data.Goals);
