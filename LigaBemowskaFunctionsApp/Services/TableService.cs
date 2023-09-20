@@ -29,6 +29,14 @@ namespace LigaBemowskaFunctionsApp.Services
             return queryResults.SingleOrDefault();
         }
 
+        public Pageable<Player> GetAllPlayers()
+        {
+            var query = TableClient.CreateQueryFilter($"Appearances gt 10");
+            var queryResults = tableClient.Query<Player>(query);
+
+            return queryResults;
+        }
+
         public async void AddPlayer(PlayerData data)
         {
             var player = new Player(data);
